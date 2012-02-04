@@ -1,5 +1,5 @@
 html {
-  background: url("bg.png") repeat;
+  background: #F7F7F7;
 }
 
 body {
@@ -44,7 +44,7 @@ a:hover {
 
 #main, div.header, li.repo {
   background: white;
-  background: rgba(255, 255, 255, 0.7);
+/*  background: rgba(255, 255, 255, 0.7);*/
   -moz-box-shadow:    0px 0px 5px 1px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
   box-shadow:         0px 0px 5px 1px rgba(0, 0, 0, 0.1);
@@ -66,10 +66,10 @@ a:hover {
 }
 
 #logo {
-  width: 190px;
-  height: 64px;
+  width: 160px;
+  height: 120px;
   margin: 15px 0 0 15px;
-  background: url("logo.png");
+  background: url("james_tauber.jpg");
   text-indent: -99999px;
 }
 
@@ -152,8 +152,7 @@ li.repo > a {
 }
 
 li.repo a:hover {
-  background: #efefef;
-  background: rgba(0, 0, 0, 0.05);
+  background: #eee;
 }
 
 li.repo h2, li.repo h3, li.repo p {
@@ -190,63 +189,6 @@ li.repo h3 {
   border-right-color: #333;
 }
 
-.repo.scala:after {
-  border-right-color: #7ac9de;
-}
-
-.repo.ruby:after {
-  border-right-color: #cc1100;
-}
-
-.repo.java:after {
-  border-right-color: #cc8300;
-}
-
 .repo.python:after {
   border-right-color: #6aad2d;
-}
-
-@keyframes small-swing { 0% { margin-top: 0px } 50% { margin-top: -10px } 100% { margin-top: 0px } }
-@-moz-keyframes small-swing { 0% { margin-top: 0px } 50% { margin-top: -10px } 100% { margin-top: 0px } }
-@-webkit-keyframes small-swing { 0% { margin-top: 0px } 50% { margin-top: -10px } 100% { margin-top: 0px } }
-@-ms-keyframes small-swing { 0% { margin-top: 0px } 50% { margin-top: -10px } 100% { margin-top: 0px } }
-
-@keyframes medium-swing { 0% { margin-top: 0px } 50% { margin-top: -20px } 100% { margin-top: 0px } }
-@-moz-keyframes medium-swing { 0% { margin-top: 0px } 50% { margin-top: -20px } 100% { margin-top: 0px } }
-@-webkit-keyframes medium-swing { 0% { margin-top: 0px } 50% { margin-top: -20px } 100% { margin-top: 0px } }
-@-ms-keyframes medium-swing { 0% { margin-top: 0px } 50% { margin-top: -20px } 100% { margin-top: 0px } }
-
-@keyframes large-swing { 0% { margin-top: 0px } 50% { margin-top: -40px } 100% { margin-top: 0px } }
-@-moz-keyframes large-swing { 0% { margin-top: 0px } 50% { margin-top: -40px } 100% { margin-top: 0px } }
-@-webkit-keyframes large-swing { 0% { margin-top: 0px } 50% { margin-top: -40px } 100% { margin-top: 0px } }
-@-ms-keyframes large-swing { 0% { margin-top: 0px } 50% { margin-top: -40px } 100% { margin-top: 0px } }
-
-.larry.size-smaller, .larry.size-small {
-  animation: small-swing 0.5s infinite ease-in-out;
-  -moz-animation: small-swing 0.5s infinite ease-in-out;
-  -webkit-animation: small-swing 0.5s infinite ease-in-out;
-  -ms-animation: small-swing 0.5s infinite ease-in-out;
-}
-
-.larry.size-medium, .larry.size-large {
-  animation: medium-swing 1.25s infinite ease-in-out;
-  -moz-animation: medium-swing 1.25s infinite ease-in-out;
-  -webkit-animation: medium-swing 1.25s infinite ease-in-out;
-  -ms-animation: medium-swing 1.25s infinite ease-in-out;
-}
-
-.larry.size-medium, .larry.size-fat {
-  animation: large-swing 1.5s infinite ease-in-out;
-  -moz-animation: large-swing 1.5s infinite ease-in-out;
-  -webkit-animation: large-swing 1.5s infinite ease-in-out;
-  -ms-animation: large-swing 1.5s infinite ease-in-out;
-}
-
-#flyzone {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
 }
