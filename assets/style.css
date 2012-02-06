@@ -1,28 +1,28 @@
 html {
   background: #F7F7F7;
 }
-
 body {
-  font: 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-top: 10px solid #663666;
+  font: 13px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.4;
   color: #666;
   min-width: 960px;
 }
 
 h1 {
-  font-weight: bold;
+  font-weight: normal;
   font-size: 20px;
   color: #333;
 }
 
 h2 {
-  font-weight: bold;
-  font-size: 20px;
-  color: #0084b4;
+  font-weight: normal;
+  font-size: 18px;
+  color: #0084B4;
 }
 
 a:link, a:visited {
-  color: #0084b4;
+  color: #0084B4;
   text-decoration: none;
 }
 
@@ -44,7 +44,6 @@ a:hover {
 
 #main, div.header, li.repo {
   background: white;
-/*  background: rgba(255, 255, 255, 0.7);*/
   -moz-box-shadow:    0px 0px 5px 1px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
   box-shadow:         0px 0px 5px 1px rgba(0, 0, 0, 0.1);
@@ -52,12 +51,16 @@ a:hover {
 }
 
 #main h1 {
-  margin: 10px 15px 0;
+  margin: 35px 15px 0;
+  font-size: 20pt;
+}
+#main h3 {
+  font-size: 12pt;
 }
 
 #main p {
-  margin: 0 10px 15px 10px;
-  font-size: 11px;
+  margin: 0 10px 100px 10px;
+  font-size: 11pt;
   line-height: 2;
 }
 
@@ -175,9 +178,9 @@ li.repo h3 {
   top: 0;
   width: 0;
   height: 0;
-  border-bottom: 50px solid transparent;
-  border-left: 50px solid transparent;
-  border-right: 50px solid #0080b0;
+  border-bottom: 30px solid transparent;
+  border-left: 30px solid transparent;
+  border-right: 30px solid #0080B0;
   pointer-events: none;
 }
 
