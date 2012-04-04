@@ -155,6 +155,33 @@
         -o-transform: perspective(600px) rotateX(60deg);
         transform: perspective(600px) rotateX(60deg);
     }
+    .hex3:before {
+        content: " ";
+        width: 0; height: 0;
+        border-bottom: 30px solid #6C6;
+        border-left: 52px solid transparent;
+        border-right: 52px solid transparent;
+        position: absolute;
+        top: -30px;
+    }
+    
+    .hex3 {
+        margin-top: 30px;
+        width: 104px;
+        height: 60px;
+        background-color: #6C6;
+        position:relative;
+    }
+    
+    .hex3:after {
+        content: "";
+        width: 0; 
+        position: absolute;
+        bottom: -30px;
+        border-top: 30px solid #6C6;
+        border-left: 52px solid transparent;
+        border-right: 52px solid transparent;
+    }
 </style>
 
 <div class="container">
@@ -421,9 +448,53 @@ transform: perspective(600px) rotateX(60deg);
 </pre>
 <div style="clear: left;"></div>
 
+<h2>Addendum</h2>
 
-<div style="margin-bottom: 50px; float: right;">
+<p><b>Will Hardy</b> suggested on Twitter the following use of <code>:before</code> and <code>:after</code> to reduce the necessary <code>div</code>s to one:
 
+<div style="float: left; width: 400px;">
+    <div class="hex3"></div>
+</div>
+<pre style="margin-left: 480px;">
+.hex:before {
+    content: " ";
+    width: 0; height: 0;
+    border-bottom: 30px solid #6C6;
+    border-left: 52px solid transparent;
+    border-right: 52px solid transparent;
+    position: absolute;
+    top: -30px;
+}
+
+.hex {
+    margin-top: 30px;
+    width: 104px;
+    height: 60px;
+    background-color: #6C6;
+    position: relative;
+}
+
+.hex:after {
+    content: "";
+    width: 0;
+    position: absolute;
+    bottom: -30px;
+    border-top: 30px solid #6C6;
+    border-left: 52px solid transparent;
+    border-right: 52px solid transparent;
+}
+</pre>
+<div style="clear: left;"></div>
+
+<p><b>jawns</b> pointed out on Hacker News that there's a Unicode code point <code>U+2B22</code>:</p>
+
+<div style="float: left; width: 400px;">
+    <span style="color: #6C6; font-size: 135px">&#x2b22;</span>
+</div>
+<pre style="margin-left: 480px;">
+&lt;span style="color: #6C6; font-size: 135px;">&amp;#x2B22;&lt;/span>
+</pre>
+<div style="clear: left;"></div>
 
 
 <div style="margin-bottom: 50px; float: right;">
