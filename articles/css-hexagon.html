@@ -148,6 +148,13 @@
     .hex2.even {
         margin-top: 53px;
     }
+    .board {
+        -webkit-transform: perspective(600px) rotateX(60deg);
+        -moz-transform: perspective(600px) rotateX(60deg);
+        -ms-transform: perspective(600px) rotateX(60deg);
+        -o-transform: perspective(600px) rotateX(60deg);
+        transform: perspective(600px) rotateX(60deg);
+    }
 </style>
 
 <div class="container">
@@ -382,6 +389,43 @@ border-bottom: 52px solid transparent;
     margin-top: 53px;
 }
 </pre>
+<div style="clear: left;"></div>
+
+<p style="margin-top: 40px;">And to finish things off, here&rsquo;s a quick demo of a CSS 3D perspective transform applied to the hex grid:</p>
+
+<div style="float: left; width: 400px;">
+    <div class="board">
+    <div class="hex2-row">
+        <div class="hex2"><div class="left"></div><div class="middle"></div><div class="right"></div></div>
+        <div class="hex2 even"><div class="left"></div><div class="middle"></div><div class="right"></div></div>
+        <div class="hex2"><div class="left"></div><div class="middle"></div><div class="right"></div></div>
+    </div>
+    <div class="hex2-row">
+        <div class="hex2"><div class="left"></div><div class="middle"></div><div class="right"></div></div>
+        <div class="hex2 even"><div class="left"></div><div class="middle"></div><div class="right"></div></div>
+        <div class="hex2"><div class="left"></div><div class="middle"></div><div class="right"></div></div>
+    </div>
+    <div class="hex2-row">
+        <div class="hex2"><div class="left"></div><div class="middle"></div><div class="right"></div></div>
+        <div class="hex2 even"><div class="left"></div><div class="middle"></div><div class="right"></div></div>
+        <div class="hex2"><div class="left"></div><div class="middle"></div><div class="right"></div></div>
+    </div>
+    </div>
+</div>
+<pre style="margin-left: 480px;">
+-webkit-transform: perspective(600px) rotateX(60deg);
+-moz-transform: perspective(600px) rotateX(60deg);
+-ms-transform: perspective(600px) rotateX(60deg);
+-o-transform: perspective(600px) rotateX(60deg);
+transform: perspective(600px) rotateX(60deg);
+</pre>
+<div style="clear: left;"></div>
+
+
+<div style="margin-bottom: 50px; float: right;">
+
+
+
 <div style="margin-bottom: 50px; float: right;">
 <a href="https://twitter.com/share" class="twitter-share-button" data-via="jtauber" data-size="large" data-related="jtauber">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
