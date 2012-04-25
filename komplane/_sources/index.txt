@@ -1,0 +1,438 @@
+====================
+Pengenalan Kom-plane
+====================
+
+.. slides::
+
+   .. figure:: /_static/logo.png
+      :class: fill
+
+
+Sakti Dwi Cahyono
+
+sakti@dev.insan.co.id
+
+April 25, 2012
+
+© Insan Infonesia
+
+.. toctree::
+   :maxdepth: 2
+
+
+Apa itu Kom-plane?
+==================
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+Kom-plane (Komputer 'Portable Log Analyzer') merupakan aplikasi untuk membantu
+pengguna dalam melakukan analisis log.
+
+
+
+Sasaran Pengguna
+================
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. rst-class:: build
+
++ **Forensik**
++ Respon terhadap security incident
++ Audit 
++ System troubleshooting
++ ... berkaitan dengan log
+
+
+Instalasi: Windows
+==================
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/windows_installer.png
+   :alt: windows installer
+   :class: centered
+
+Instalasi: License Agreement
+----------------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/license_agreement.png
+   :alt: license agreement
+   :class: centered
+
+
+Instalasi: Checklist
+------------------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/installer_checklist.png
+   :alt: installer checklist
+   :class: centered
+
+
+Instalasi: Path
+---------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/installer_path.png
+   :alt: installer path
+   :class: centered
+
+
+Instalasi: Python
+-----------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/installer_python.png
+   :alt: installer python
+   :class: centered
+
+Instalasi: Proses
+-----------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/installer_process.png
+   :alt: installer process
+   :class: centered
+
+Instalasi: Start Menu
+---------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+**Windows**
+
+.. image:: /_static/start_menu_windows.png
+   :alt: start menu windows
+   :class: centered
+
+**Ubuntu**
+
+Accessories -> Komplane
+
+.. image:: /_static/start_menu_ubuntu.png
+   :alt: start menu ubuntu
+   :class: centered
+
+atau::
+
+   $ sudo komplane
+
+
+Instalasi: Ubuntu
+=================
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+::
+
+    $ sudo apt-get update
+    $ sudo apt-get install debconf python-imaging python-imaging-tk \
+      python-psutil python-lxml python-pypdf python-reportlab \
+      python-pyparsing python-setuptools python-pip
+    $ cd install_dir
+    $ sudo dpkg -i komplane_1.1_amd64.deb
+
+
+Penggunaan: Control Panel
+=========================
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/panel_kontrol.png
+   :alt: panel kontrol
+   :align: center
+   :class: centered
+
+
+Penggunaan: Web Browser
+-----------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+Buka http://localhost:8000/
+
+.. image:: /_static/web_browser_komplane.png
+   :alt: membuka web browser
+   :class: centered
+
+
+Penggunaan: Login
+-----------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/komplane_login.png
+   :alt: Tampilan login komplane
+   :scale: 60%
+   :align: center
+
+
+Penggunaan: Add Project
+-----------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/add_project.png
+   :alt: Tambah Project
+   :scale: 60%
+   :align: center
+
+Penggunaan: Choose Project
+--------------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/pilih_project.png
+   :alt: Pilih Project
+   :scale: 60%
+   :align: center
+
+Penggunaan: Device
+------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/add_device.png
+   :alt: Tambah Device
+   :scale: 60%
+   :align: center
+
+Penggunaan: Log Type
+--------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/log_type.png
+   :alt: Pilih tipe log
+   :scale: 60%
+   :align: center
+
+
+Penggunaan: Log Location -> Local Path
+--------------------------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/local_path_log.png
+   :alt: Local Path log
+   :scale: 60%
+   :align: center
+
+Penggunaan: Log Location -> Upload Log
+--------------------------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/upload_log.png
+   :alt: Upload log
+   :scale: 60%
+   :align: center
+
+Penggunaan: Time Filter
+-----------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/please_choose_time_span_message.png
+   :alt: Pesan Set Time Span
+   :scale: 60%
+   :align: center
+
+
+Penggunaan: Set Time Span
+-------------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/set_time_span.png
+   :alt: Set Time Span
+   :scale: 60%
+   :align: center
+
+
+Penggunaan: Search
+------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/search_num_bytes.png
+   :alt: Pencarian Berdasarkan Num bytes
+   :scale: 60%
+   :align: center
+
+
+Penggunaan: Koreksi Waktu
+-------------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/time_adjustment.png
+   :alt: Penyesuaian Waktu
+   :scale: 60%
+   :align: center
+
+
+Penggunaan: Penanda
+-------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/penandaan.png
+   :alt: Penandaan
+   :scale: 60%
+   :align: center
+
+Penggunaan: Anotasi
+-------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/annotate.png
+   :alt: Anotasi
+   :scale: 60%
+   :align: center
+
+Penggunaan: Report
+------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/create_report.png
+   :alt: Membuat Report
+   :scale: 60%
+   :align: center
+
+
+Penggunaan: Lihat Report
+------------------------
+
+.. slides::
+
+   .. figure:: /_static/bg.png
+      :class: fill
+
+.. image:: /_static/view_report.png
+   :alt: Melihat Report
+   :scale: 60%
+   :align: center
+
+Tampilan Administratif
+======================
+
+Buka http://localhost:8000/admin
+
+
+.. rst-class:: build
+
++ Manajemen Pengguna
++ Otorisasi
++ Penambahan Log Parser
+
+
+Q & A
+=====
+
+.. slides::
+
+   .. figure:: /_static/q-a.jpg
+      :class: fill
+
+      CC BY-SA http://www.flickr.com/photos/eleaf/2536358399/
+
+
+The End
+=======
+
+
+.. slides::
+
+   .. figure:: /_static/thank-you.jpg
+      :class: fill
+
+      CC BY-SA http://www.flickr.com/photos/wwworks/4759535950/
+
