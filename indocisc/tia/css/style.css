@@ -1,0 +1,235 @@
+/* CSS by Tiapop */
+
+body   {background-image: url('../image/low_contrast_linen_@2X.png');
+		font-family: FanWood;
+		font-size:16px;
+        text-shadow:0 1px 1px rgba(0, 0, 0, 0.2);
+        text-align: justify;
+        color:#ffffff;
+}
+
+@font-face {font-family:Oregano; src:url("font/Oregano-Regular.ttf") format("truetype")}
+@font-face {font-family:Quatro; src:url("font/Quattrocento-Regular.ttf") format("truetype")}
+@font-face {font-family:FanWood; src:url("font/FanwoodText-Regular.ttf") format("truetype")}
+@font-face {font-family:Peralta; src:url("font/Peralta-Regular.ttf") format("truetype")}
+@font-face {font-family:Rammeto; src:url("font/RammettoOne-Regular.ttf") format("truetype")}
+
+
+p		{font-size: 20px;
+		text-align: justify;
+		color:#ffffff;
+	} 
+
+p.quote	{font-size: 18px;
+		font-family:Peralta;
+		color:#1AA8BE;
+		text-align:center;
+	} 
+
+p.training {font-size: 14px;}
+
+p.top 	{color:#19A6BD;
+	  	font-family: FanWood;
+		font-size:14px;
+	}
+
+p.ket 	{font-family: FanWood;
+		font-size:14px;
+		color:#ffffff;
+	}
+
+a:link {color:#FFFF66; text-decoration:none;}
+a:visited {color: #FFFF66; text-decoration:none;}
+a:hover {color: #1AA8BE; text-decoration:none;}
+a:active {color: #FFFF66; text-decoration:none;}
+
+h1	{color:#1AA8BE;
+	font-family:Peralta;
+	}
+
+h3	{font-family:Peralta;
+	}
+
+ul	{ font-size: 18px; 
+	}
+
+ul.outset 	{border-top-style: double;
+			border-color: #ffffff;
+			font-family:Rammeto;
+			font-size: 12px;
+		}
+
+#nav{
+	margin-right: 30px;
+	}
+
+#outer    	{width:1250px;  margin:0 auto; }
+#wrapper  	{width:1200px; margin:0 auto; }
+
+#logo     		{width:700px; float:left;}
+#kanan ul li	{display:inline; padding:5px;}
+#kanan			{width:500px; float:right;}
+
+#navigasi	{float:right;}
+
+#header{
+	float: left;
+	margin-bottom: 10px;
+}
+#banner {clear:both;}       
+
+#banner {margin-top: 10px;
+		margin-bottom:10px;
+}
+
+#content {float:left;width:1200;
+		margin-top:0px;
+		padding-left:5px;
+		padding-right:5px;
+		margin-bottom:10px;
+		padding-bottom: 10px;
+	}
+
+
+#right-content 	{float:right; width:900px; 
+}
+
+#left-content	{float:left; width:300px;
+}
+
+#agenda		{float:both; width:250px;
+			margin-top:0px;
+			padding-left:10px;
+			padding-right:10px;
+			margin-bottom:10px;
+			font-family: Century Gothic, sans-serif; 
+			font-size: 16px;
+			color:#FFFF66;
+			border-style: outset;
+			border-color: #ffffff;
+			border-width: 10px;
+}
+
+#agenda 	ul li {font-family: FanWood;
+			font-size:16px;
+			color:#ffffff;}
+
+#event		{float:both; width:250px;
+			
+			margin-top:0px;
+			padding-left:10px;
+			padding-right:10px;
+			margin-bottom:10px;
+			font-size: 16px;
+			color:#FFFF66;
+			border-style: outset;
+			border-color: #ffffff;
+			border-width: 10px;
+}
+
+#event 	p {font-family: FanWood;
+		font-size:16px;
+		color:#ffffff;}
+
+#registration		{float:both; width:250px;
+					
+					margin-top:0px;
+					padding-left:10px;
+					padding-right:10px;
+					margin-bottom:10px;
+					font-family: Century Gothic, sans-serif; 
+					font-size: 16px;
+					color:#FFFF66;
+					border-style: outset;
+					border-color: #ffffff;
+					border-width: 10px;
+}
+
+#registration p {font-family: FanWood;
+		font-size:16px;
+		color:#ffffff;}
+
+#subcontent		{float:both; width:300px;
+				background-color:#CD5C5C;
+				margin-top:0px;
+				padding-left:50px;
+				padding-right:20px;
+				margin-bottom:10px;
+}
+
+#sub1		{float:left; width:500px;
+			font-family: calibri;}
+
+#sub2		{float:right; width:500px;
+			font-family: calibri;}
+			
+
+#footer {clear:both;}
+
+#tagh ul li	{display:inline; padding:5px;}
+
+
+
+#footer {float:left width:900px;
+        margin-top:20px;
+        margin-bottom:20px;
+        font-size: 18px;
+        
+}
+
+#footer-layout {clear:both;}
+
+#footer-layout {
+				background-image: url('../image/dark_wall_@2X.png');
+				font-family: FanWood;
+				font-size:12px;
+				color: #ffffff;
+			}
+
+.tag {
+	display: inline;
+    float: left;
+    margin: 0 30px 0 0;
+    padding: 0;
+    width: 210px;
+    margin-top: 7px;
+
+}
+
+
+#tagh p {
+    clear: both;
+    display: block;
+    line-height: 1.6em;
+    margin: 0;
+    padding: 10px 0 0;
+    font-family: "Georgia"
+
+}
+
+.box {
+	background-color: #020616;
+	border: 1px solid #666666;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 5px 5px 5px #020616;
+	padding: 25px;
+}
+#mapss{
+	margin-left: 200px;
+	font-size: 20px;
+}
+.box1 {
+    	background-color: #FFFFFF;
+    	border: 1px solid #666666;
+    	border-radius: 8px 8px 8px 8px;
+    	box-shadow: 5px 5px 5px #CCCCCC;
+    	padding: 10px;
+	}
+	.position {
+		padding-right: 10px;
+		margin-left: -10px;
+		padding-top: 5px;
+	}
+	.tag {
+		margin-left: -10px;
+	}
