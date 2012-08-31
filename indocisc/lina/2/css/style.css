@@ -1,0 +1,186 @@
+
+
+body   {background-image: url('../image/background.png');
+		font-family: quantico;
+		font-size:16px;
+        text-shadow:0 1px 1px rgba(0, 0, 0, 0.2);
+        color: #ffffff;
+}
+
+p			{font-size: 16px;text-align: justify;} 
+p.quote		{font-size: 20px;
+			font-family: appleberry;} 
+p.training 	{font-size: 14px;}
+p.header 	{text-align: left;}
+
+h1, h2, h3, h4	{color:#9BA6C1;}
+
+h5	{font-family:quantico;
+	 font-size: 20px;} 
+
+li	{font-family:quantico;
+	font-size: 14px;}
+
+ul	{ font-size: 18px; }
+ul.outset 	{border-top-style: double;
+			border-top-color:#9CA8C5}
+
+a 	{text-decoration:none;
+	font-family: quantico;
+	font-size: 14px;
+	color:#FFFFFF;
+	font-style: bold;
+}
+a:hover {color:#006991;}
+
+@font-face {font-family:quantico; src:url("font/Quantico-Regular.ttf") format("truetype")}
+@font-face {font-family:appleberry; src:url("font/appleberry.ttf") format("truetype")}
+@font-face {font-family:novamono; src:url("font/NovaMono.ttf") format("truetype")}
+
+#nav{margin-right: 30px;}
+
+#outer    	{width:1250px;  margin:0 auto; background-image: url('../image/background.png');}
+#wrapper  	{width:1200px; margin:0 auto; background-image: url('../image/background.png');}
+
+#logo     		{width:700px; float:left;}
+#kanan ul li	{display:inline; padding:5px;}
+#kanan			{width:500px; float:right;}
+
+#navigasi	{float:right;}
+
+#header{
+	border-bottom-style: double;
+	border-bottom-width: 5px;
+	float: left;
+	margin-bottom: 10px;
+	color:#9CA8C5;
+	border-bottom-color: #F7A901; 
+}
+
+#banner {clear:both;}       
+
+#banner {margin-top: 10px;
+		margin-bottom:10px;
+}
+
+#content {float:left;width:1200;
+		margin-top:0px;
+		padding-left:5px;
+		padding-right:5px;
+		margin-bottom:10px;
+		padding-bottom: 10px;
+		border-bottom-style: double;
+		border-bottom-width: 5px;
+		border-bottom-color: #F7A901;
+}
+
+#content h2 {margin-top: -30px;}
+
+#right-content 	{float:right; width:850px;}
+
+#left-content	{float:left; width:300px;}
+
+#agenda		{float:both; width:250px;
+			background-image:url('../image/notes.png');
+			margin-top:0px;
+			padding-left:10px;
+			padding-right:10px;
+			margin-bottom:10px;
+			font-family: novamono; 
+			font-size: 16px;
+			color:#000000;
+}
+
+#agenda ul li 	{font-family: quantico; 
+				font-size: 14px;
+				color:#000000;}
+
+#event		{float:both; width:250px;
+			background-image:url('../image/notes.png');
+			margin-top:0px;
+			padding-left:10px;
+			padding-right:10px;
+			margin-bottom:10px;
+			font-family: novamono; 
+			font-size: 16px;
+			color:#000000;
+}
+
+#event p {font-family: quantico; 
+		font-size: 14px;
+		color:#000000;}
+
+#registration		{float:both; width:250px;
+					background-image:url('../image/notes.png');
+					margin-top:0px;
+					padding-left:10px;
+					padding-right:10px;
+					margin-bottom:10px;
+					font-family: novamono; 
+					font-size: 16px;
+					color:#000000;
+}
+
+#registration p {font-family: quantico; 
+			font-size: 14px;
+			color:#000000;}			
+
+#footer {clear:both;}
+
+#tagh ul li	{display:inline; padding:5px;}
+
+#footer {float:left width:900px;
+        margin-top:20px;
+        margin-bottom:20px;
+        font-size: 16px;
+        font-family: quantico;
+        color:#9BA6C1;
+}
+
+.tag {
+	display: inline;
+    float: left;
+    margin: 0 30px 0 0;
+    padding: 0;
+    width: 210px;
+    margin-top: 7px;
+}
+
+#tagh p {
+    clear: both;
+    display: block;
+    line-height: 1.6em;
+    margin: 0;
+    padding: 10px 0 0;
+    font-family: quantico;
+    color: #9CA8C5;
+}
+
+.box {
+	background-color: #020616;
+	border: 1px solid #666666;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 5px 5px 5px #020616;
+	padding: 25px;
+}
+
+#mapss{
+	margin-left: 200px;
+	font-size: 16px;
+}
+
+.box1 {
+    	background-color: #FFFFFF;
+    	border: 1px solid #666666;
+    	border-radius: 8px 8px 8px 8px;
+    	box-shadow: 5px 5px 5px #CCCCCC;
+    	padding: 10px;
+}
+
+.position {
+		padding-right: 10px;
+		margin-left: -10px;
+		padding-top: 5px;
+}
+
+.tag {margin-left: 0px;}
