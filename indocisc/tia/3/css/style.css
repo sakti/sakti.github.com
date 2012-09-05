@@ -1,0 +1,229 @@
+/* Agustus 2012 */
+
+body   {background-image: url('../image/bg11.jpg');
+		font-family: Kreon;
+		font-size: 18px;
+		
+		
+        text-shadow:0 1px 1px rgba(0, 0, 0, 0.2);
+        text-align: justify;
+        color:#ffffff;
+}
+
+@font-face {font-family:Oregano; src:url("font/Oregano-Regular.ttf") format("truetype")}
+@font-face {font-family:Quatro; src:url("font/Quattrocento-Regular.ttf") format("truetype")}
+@font-face {font-family:FanWood; src:url("font/FanwoodText-Regular.ttf") format("truetype")}
+@font-face {font-family:Peralta; src:url("font/Peralta-Regular.ttf") format("truetype")}
+@font-face {font-family:Rammeto; src:url("font/RammettoOne-Regular.ttf") format("truetype")}
+@font-face {font-family:Piedra; src:url("font/Piedra-Regular.ttf") format("truetype")}
+@font-face {font-family:One; src:url("font/HeadlandOne-Regular.ttf") format("truetype")}
+@font-face {font-family:Kreon; src:url("font/Kreon-Regular.ttf") format("truetype")}
+@font-face {font-family:Segoe; src:url("font/segoeui.ttf") format("truetype")}
+
+
+
+p		{font-size: 18px;
+		text-align: justify;
+		color:#ffffff;
+	} 
+
+p.quote	{font-size: 20px;
+		font-family:Kreon;
+		color:#F7AC00;
+		text-align:center;
+		font-weight: bold;
+	} 
+
+p.training {font-size: 14px;}
+
+p.top 	{color:#F7AC00;
+	  	font-family: Kreon;
+		font-size:14px;
+	}
+
+p.ket 	{font-family: Kreon;
+		font-size:14px;
+		color:#ffffff;
+	}
+
+a:link {color:#00CFFF; text-decoration:none;}
+a:visited {color: #00CFFF; text-decoration:none;}
+a:hover {color: #F7AC00; text-decoration:none;}
+a:active {color: #00CFFF; text-decoration:none;}
+
+h1	{color:#F7AC00;
+	font-family:Kreon;
+	}
+
+h3	{font-family:Kreon;}
+
+
+
+ul.outset 	{border-top-style: double;
+			border-color: #ffffff;
+			font-family:Kreon;
+			font-size: 16px;
+			font-weight: bold;
+		}
+
+#nav	{margin-right: 30px;}
+
+#outer    	{width:1250px;  margin:0 auto;}
+
+#wrapper  	{width:1200px; margin:0 auto; }
+
+#logo     		{width:700px; float:left;}
+#kanan ul li	{display:inline; padding:5px;}
+#kanan			{width:500px; float:right;}
+
+#navigasi	{float:right;}
+
+#header	{float: left;
+		margin-bottom: 10px;
+		
+	}
+
+#banner {clear:both;}       
+
+#banner {margin-top: 10px;
+		margin-bottom:0px;
+		border-style: solid;
+		border-width: 5px;
+		border-color: #ffffff;
+}
+
+#content 	{float:left;width:1200;
+			margin-top:0px;
+			padding-left:5px;
+			padding-right:5px;
+			margin-bottom:10px;
+			padding-bottom: 10px;
+		}
+
+
+#right-content 	{float:right; width: 900px; }
+
+#left-content	{float:left; width:280px;}
+
+#agenda		{float:both; width:230px;
+			margin-top:0px;
+			padding-left:10px;
+			padding-right:10px;
+			margin-bottom:30px;
+			font-size: 16px;
+			color:#F7AC00;
+			border-style: outset;
+			border-color: #ffffff;
+			border-width: 5px;
+}
+
+#agenda 	ul li {font-family: Kreon;
+			font-size:16px;
+			color:#ffffff;}
+
+#event		{float:both; width:230px;
+			margin-top:0px;
+			padding-left:10px;
+			padding-right:10px;
+			margin-bottom:30px;
+			font-size: 16px;
+			color:#F7AC00;
+			border-style: outset;
+			border-color: #ffffff;
+			border-width: 5px;
+}
+
+#event 	p 	{font-family: Kreon
+			font-size:16px;
+			color:#ffffff;
+		}
+
+#registration	{float:both; width:230px;
+				margin-top:0px;
+				padding-left:10px;
+				padding-right:10px;
+				margin-bottom:30px;
+				font-size: 16px;
+				color:#F7AC00;
+				border-style: outset;
+				border-color: #ffffff;
+				border-width: 5px;
+}
+
+#registration p {font-family: Kreon;
+				font-size:16px;
+				color:#ffffff;
+			}
+
+
+
+#footer {clear:both;}
+
+#tagh ul li	{display:inline; padding:5px;}
+
+#footer {float:left width:900px;
+        margin-top:20px;
+        margin-bottom:20px;
+        font-size: 18px;    
+}
+
+#footer-layout {clear:both;}
+
+#footer-layout {
+				background-image: url('../image/bg14.jpg');
+				position : relative;
+				font-family: Kreon;
+				margin :auto;
+				font-size:12px;
+				color: #ffffff;
+				padding-top: 20px;
+				padding-bottom: 20px;
+			}
+
+.tag {
+	display: inline;
+    float: left;
+    margin: 0 30px 0 0;
+    padding: 0;
+    width: 210px;
+    margin-top: 7px;
+}
+
+
+#tagh p {
+    clear: both;
+    display: block;
+    line-height: 1.6em;
+    margin: 0;
+    padding: 10px 0 0;
+    font-family: "Georgia"
+}
+
+.box {
+	background-color: #020616;
+	border: 1px solid #666666;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 5px 5px 5px #020616;
+	padding: 25px;
+}
+
+#mapss{
+	margin-left: 200px;
+	font-size: 20px;
+}
+
+.box1 {
+    	background-color: #FFFFFF;
+    	border: 1px solid #666666;
+    	border-radius: 8px 8px 8px 8px;
+    	box-shadow: 5px 5px 5px #CCCCCC;
+    	padding: 10px;
+	}
+
+.position {
+		padding-right: 10px;
+		margin-left: -10px;
+		padding-top: 5px;
+	}
+
+.tag {	margin-left: -10px;	}
