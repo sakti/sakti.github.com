@@ -1,0 +1,238 @@
+/*CSS by Tia Chandrawati*/
+
+body {
+	margin:0;
+	padding:0;
+	line-height: 1.5em;
+	background-image: url('../images/bg.png');
+	background-color:#006991;
+	font-family: Kreon;
+	background-attachment:fixed;
+    text-align: justify;
+}
+
+a:link {color:#F6AA00; }
+a:visited {color: #F6AA00; }
+a:hover {color: #020265; }
+a:active {color: #F6AA00; }
+
+@font-face {font-family:Kreon; src:url("font/Kreon-Regular.ttf") format("truetype")}
+
+h3	{
+	color: #F5A800;
+}
+
+
+
+#banner{
+	width:100%;
+	margin:0 auto;
+	background-color:#3B5998;
+	float: left;
+}
+
+#banner-wrapper {
+	width:960px;
+	margin:0 auto;
+}
+
+#logo 	{float:left;}
+#quote	{float:right;}
+
+#navigasi 	{clear:both;}
+
+#navigasi {
+    background-color: #F3AE14;
+	height: 30px;
+    font-size: 16px;
+}
+
+#wrapper-navigasi { 
+	width: 960px;  margin:0 auto;
+}
+
+#wrapper-navigasi li a:hover, #menu_wrapper li.active a {
+    color: #3B5998;
+    background: #FEE7B3;
+    border-bottom: 2px solid #FEE7B3;
+}
+
+
+#wrapper-navigasi ul li {
+	display: inline;
+}
+
+#wrapper-navigasi ul li a {
+	padding: 0em 1em 0.2em 1em;
+	text-decoration: none;
+	color: #3B5998;
+	padding-left: 0px;
+
+}
+
+
+#content {clear:both;}
+
+#content {	
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#content-wrapper {
+	width: 960px; margin:0 auto;
+}
+
+#left-content {
+	float:left; width:960px;
+	margin-top:0px;
+	padding-left:15px;
+	padding-right:15px;
+	margin-bottom:10px;
+}
+
+#column-left {
+    background-image: url("../images/img-column2.png");
+	float:left;
+	width:300px;
+	margin-right: 5px;
+	margin-left: 0px;
+	border-radius: 15px;
+}
+
+#column-center {
+    background-image: url("../images/img-column2.png");
+	float:left;
+	width:300px;
+	margin-left: 5px;
+	margin-right: 5px;
+	
+	border-radius: 15px;
+}
+
+#column-right {
+    background-image: url("../images/img-column2.png");
+	float:left;
+	width:300px;
+	margin-left: 5px;
+	margin-right: 5px;
+	
+    border-radius: 15px;
+
+}
+
+#detail {clear:both;}
+
+#detail {border-radius: 15px;}
+
+#footer {clear:both;}
+
+#footer {
+	width:960px;
+	margin:0 auto;
+	border-top: 3px solid #BEC3CE;
+}
+
+
+.calloutpoint-left {
+    background:#ffffff;
+    padding:24px;
+    width: 870px;
+    margin: 0px 0px 0px 15px;
+    border-radius:3px;
+    position:relative;
+    float: left;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+
+
+}
+
+.calloutpoint-left:before{
+    content:"";
+    position:absolute;
+    top: -10px;
+    left: 150px; 
+    background: #ffffff;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -ms-transform:rotate(45deg);
+    /* reduce the damage in FF3.0 */
+    display:block;
+    width: 24px;
+    height: 24px;
+    z-index:10;
+}
+
+.calloutpoint-center {
+    background:#ffffff;
+    padding:24px;
+    width: 870px;
+    margin: 0px 0px 0px 15px;
+    border-radius:3px;
+    position:relative;
+    float: left;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+
+
+}
+
+.calloutpoint-center:before{
+    content:"";
+    position:absolute;
+    top: -10px;
+    left: 480px; 
+    background: #ffffff;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -ms-transform:rotate(45deg);
+    /* reduce the damage in FF3.0 */
+    display:block;
+    width: 24px;
+    height: 24px;
+    z-index:10;
+}
+
+.calloutpoint-right {
+    background:#ffffff;
+    padding:24px;
+    width: 870px;
+    margin: 0px 0px 0px 15px;
+    border-radius:3px;
+    position:relative;
+    float: left;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+
+
+}
+
+.calloutpoint-right:before{
+    content:"";
+    position:absolute;
+    top: -10px;
+    left: 800px; 
+    background: #ffffff;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -ms-transform:rotate(45deg);
+    /* reduce the damage in FF3.0 */
+    display:block;
+    width: 24px;
+    height: 24px;
+    z-index:10;
+}
+
+
+.tag {
+	display: inline;
+    float: left;
+    margin: 0 30px 0 0;
+    padding: 0;
+    width: 210px;
+    margin-top: 7px;
+}
+
