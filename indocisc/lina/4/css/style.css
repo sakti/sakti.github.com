@@ -1,0 +1,273 @@
+
+body   {
+	background-color: #ffffff;
+	font-family: calibri;
+	font-size:16px;
+    color: #000;
+}
+
+p{
+	font-size: 14px;
+	text-align: justify;
+} 
+p.quote{
+	font-size: 20px;
+	font-family: calibri;
+	padding-right: 10px;
+	color: #F2A702;
+	font-weight:bold;
+}
+p.training 	{
+	font-size: 14px;
+}
+p.header 	{
+	text-align: left;
+}
+
+h1, h2, h3, h4	{color:#3D3D3D;} 
+
+li	{
+	font-family:calibri;
+	font-size: 14px;
+}
+
+ul	{ 
+	font-size: 18px; 
+}
+ul.outset 	{
+	border-top-style: double;
+	border-top-color:#9CA8C5
+}
+
+a 	{
+	text-decoration:none;
+	font-family: calibri;
+	font-size: 16px;
+	color:#9CA8C5;
+	font-style: bold;
+}
+a:hover {color:#F8AA02;}
+
+@font-face {font-family:calibri; src:url("font/calibri.ttf") format("truetype")}
+
+
+#outer    	{
+	width:1000px;  
+	margin:0 auto;
+	background-color: #272822;
+}
+
+#wrapper  	{
+	width:980px; 
+	margin:0 auto;
+	background-color: #272822; 
+}
+
+#logo     		{width:300px; float:left;}
+#kanan ul li	{display:inline; padding:5px;}
+#kanan			{width:660px; float:right;}
+
+#navigasi	{
+	float:left;
+	padding-right: 10px;
+}
+
+#header{
+	border-style: solid;
+	border-width: 5px;
+	float: left;
+	margin-bottom: 10px;
+	color:#9CA8C5;
+	background-color: #006699;
+	width: 970px; height:auto;
+	border-radius: 5px;
+}
+
+#banner {clear:both;}       
+
+#banner {
+	margin-top: 10px;
+	margin-bottom:10px;
+}
+
+#content {
+	float:left;
+	width:960px;
+	padding: 20px 10px 10px 10px;
+	margin-bottom:10px;
+	border-bottom-style: double;
+	border-width: 7px;
+	border-top-style: double;
+	border-color: #F7A901;
+	background-color: #ffffff;
+}
+
+#right-content 	{
+	float:left;
+	width:670px; height: auto;
+	padding-left:10px;
+	padding-right: 10px;
+	color:#000;
+}
+#right-box{
+	float:left;
+	background-color: #CDD3E0;
+	border-radius: 10px;
+}
+
+#left-content	{
+	float:left;
+	width:250px;
+}
+
+#box-content{
+	width:450px; height:480px;
+	background-color: #CDD3E0;
+	border-radius: 10px;
+	padding: 5px 7px 0 15px;
+}
+
+#left-service{
+	float:left;
+	width: 480px;
+}
+
+#right-service{
+	float:right;
+	width: 480px;
+}
+#agenda		{
+	float:both; width:220px;
+	background-color: #CDD3E0;
+	padding-left:5px;
+	padding-right:5px;
+	margin-bottom:5px;
+	font-family: calibri; 
+	font-size: 14px;
+	color:#000;
+}
+
+#agenda ul li 	{
+	font-family: calibri; 
+	font-size: 14px;
+	color:#000;
+}
+
+#footer {
+	clear:both;
+	color:#ffffff;
+	font-size: 12px;
+	padding-bottom: 10px;
+}
+
+#tagh {
+	float:left;
+    margin-top:2px; margin-bottom:10px;
+    font-size: 12px; font-family: calibri;
+    border-style: solid; border-width: 5px; border-radius: 5px;
+	color:#9CA8C5;
+	background-color: #006699;
+	width: 950px; height:auto;
+	padding-left: 20px;
+}
+
+#tagh p {
+    clear: both;
+    display: block;
+    line-height: 1.6em;
+    margin: 0;
+    padding: 10px 0 0;
+    font-family: calibri;
+    color: #272822;
+    background-color: #006699;
+}
+#tagh a{
+	font-size: 14px;
+	color:#000062;
+}
+
+.tag {
+	display: inline;
+    float: left;
+    margin: 0 20px 0 0;
+    padding: 0;
+    width: 210px;
+    margin-top: 5px;
+    margin-left: 0px;
+}
+
+.box {
+	border: 0px solid #666666;
+	border-radius: 10px;
+	padding: 5px;
+	background-color: #CDD3E0;
+}
+
+#mapss{
+	margin-left: 200px;
+	font-size: 16px;
+}
+
+.box1 {
+	background-color: #FFFFFF;
+	border: 1px solid #666666;
+	border-radius: 8px 8px 8px 8px;
+	box-shadow: 5px 5px 5px #CCCCCC;
+	padding: 10px;
+}
+
+.position {
+	padding-right: 10px;
+	margin-left: -10px;
+	padding-top: 5px;
+}
+#bottom-content{
+	color: #000;
+	width: 940px; height: auto;
+}
+
+#menu {
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin: 0 0;
+	padding: 0;
+	list-style-type: none;
+	background-color: #eee;
+	font-size: 13px;
+	height: 40px;
+	border-top: 2px solid #eee;
+	border-bottom: 2px solid #ccc;
+}
+#menu li {
+	float: left;
+	margin: 0;
+}
+#menu li a {
+	text-decoration: none;
+	display: block;
+	padding: 0 25px;
+	line-height: 30px;
+	color: #666;
+}
+#menu_wrapper ul {
+	border-top: 2px solid #333;
+	border-bottom: 2px solid #000;
+	background: #333;
+}
+#menu_wrapper li a {
+	color: #9CA8C5;
+}
+#menu_wrapper li a:hover, #menu_wrapper li.active a {
+	color: #F7AB01;
+	background: #555;
+	border-bottom: 2px solid #444;
+}
+#menu_wrapper {
+	padding: 0 16px 0 0;
+}
+#menu_wrapper div {
+	float: left;
+	height: 44px;
+	width: 12px;
+}
