@@ -284,7 +284,7 @@ Datagram socket, connectionless socket.
 
 SOCK_STREAM
 ```````````
-Stream socket, reliable tow-way connected communicatino stream.
+Stream socket, reliable tow-way connected communication stream.
 
 
 Quiz
