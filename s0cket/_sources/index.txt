@@ -82,7 +82,7 @@ IPv4 menggunakan 32-bit untuk alamat IP.
 
 ::
     
-    $python -c "'{0:,}'.format(2 ** 32)"
+    $python -c "print '{0:,}'.format(2 ** 32)"
 
     4,294,967,296
 
