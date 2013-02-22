@@ -1,0 +1,649 @@
+=========================================
+Python Network Programming, socket module
+=========================================
+
+.. figure:: /_static/google_server.jpg
+  :class: fill
+
+  CC BY http://www.flickr.com/photos/epitti/2370848133/
+
+ID Python Meetup, 23 Februari 2013
+
+
+
+Me
+==
+
+.. figure:: /_static/bg.png
+  :class: fill
+
+Sakti Dwi Cahyono
+
+webdev @ `insan infonesia`_
+
+saktidwicahyono.name_
+
+github.com/sakti
+
+@saktidc
+
+Agenda
+======
+
+.. figure:: /_static/bg.png
+  :class: fill
+
+- Intro TCP/IP
+- Socket
+- Client & Server Program
+
+
+
+Intro TCP/IP
+============
+
+.. figure:: /_static/bg.png
+  :class: fill
+
+
+Internet
+--------
+
+.. figure:: /_static/Internet_map_1024.jpg
+  :class: fill
+
+  source: wikipedia
+
+.. rst-class:: white
+
+Internet = Internetwork, interconnecting computer networks
+
+
+
+Apa itu TCP/IP
+--------------
+
+
+Kumpulan *protocol* kumunikasi yang digunakan pada Internet atau network
+sejenis.
+
+
+*Protocol stack* paling popular untuk *wide area network*.
+
+
+Transmission Control Protocol (675, 793, 1122, 2581), 
+Internet Protocol (ipv4: 791).
+
+
+Seberapa besar?
+---------------
+
+IPv4 menggunakan 32-bit untuk alamat IP.
+
+::
+    
+    $python -c "'{0:,}'.format(2 ** 32)"
+
+    4,294,967,296
+
+
+Sudah habis pada tanggal `3 Februari 2011`_.
+
+Layered Model
+-------------
+
+- Application Layer (http, ssh, ftp, xmpp, dns)
+- Transport Layer (TCP, UDP)
+- Internet Layer (IP & routing)
+- Network Access / Link Layer (Ethernet, wi-fi, ...)
+
+
+Cara Kerja
+----------
+
+.. figure:: /_static/ip_stack_connections.png
+   :class: centered
+   :width: 500px
+
+   source: wikipedia
+
+
+Enkapsulasi Data
+----------------
+
+.. figure:: /_static/udp_encapsulation.png
+   :class: centered
+   :width: 700px
+
+   source: wikipedia
+
+Alamat IP (Internet Layer)
+--------------------------
+
+IPv4
+````
+
+32 bit
+
+::
+
+    74.125.135.113
+
+
+
+IPv6
+````
+
+128 bit
+
+::
+
+    2404:6800:4003:802::1007
+
+
+Nomor Port (Transport Layer)
+----------------------------
+
+16 bit unsigned integer (1 - 65535).
+
+
+========== =============
+Well-known 1 - 1023
+Registered 1024 - 49151
+Dynamic    49152 - 65535
+========== =============
+
+::
+
+    $cat /etc/services
+    .
+    .
+    ftp-data    20/tcp
+    ftp         21/tcp
+    fsp         21/udp      fspd
+    ssh         22/tcp              # SSH Remote Login Protocol
+    ssh         22/udp
+    telnet      23/tcp
+    smtp        25/tcp      mail
+    .
+
+
+Byte-Order
+----------
+
+Jika data lebih panjang dari 1 byte. Bagaimana cara menyusunnya?
+
+::
+
+    int         2 bytes
+    long        4 bytes
+    long long   8 bytes
+
+    Decimal 11111 = 0x2b67
+
+Big-endian
+::
+
+    0x2b 0x67
+
+Little-endian
+::
+
+    0x67 0x2b
+
+
+Socket
+======
+
+.. figure:: /_static/bg.png
+  :class: fill
+
+Apa itu socket?
+---------------
+
+Everything in Unix is a file.
+
+    "a way to speak to other programs using standard Unix file 
+    descriptors."
+
+    -- `Beej Jorgensen`_
+
+
+File descriptor
+---------------
+
+.. highlight:: c
+
+::
+
+    #include <stdio.h>
+
+    int main(void)
+    {
+        fprintf(stdout, "%s", "write to stdout\n");
+        fprintf(stderr, "%s", "write to stderr\n");
+        printf("%d %d %d\n", fileno(stdin), fileno(stdout),
+            fileno(stderr));
+        return 0;
+    }
+
+output:
+::
+
+    write to stdout
+    write to sterr
+    0 1 2
+
+
+File descriptor, python version
+-------------------------------
+
+
+.. code-block:: python
+
+    import sys
+
+    if __name__ == '__main__':
+        sys.stdout.write('write to stdout\n')
+        sys.stderr.write('write to stderr\n')
+        print('%d %d %d' % (sys.stdin.fileno(),
+            sys.stdout.fileno(),
+            sys.stderr.fileno()))
+
+
+Python socket module
+--------------------
+
+::
+    
+    $ipython
+    In [1]: import socket
+    In [2]: socket?
+    ..
+    Docstring:
+    This module provides socket operations and some related functions.
+    On Unix, it supports IP (Internet Protocol) and Unix domain sockets.
+    On other systems, it only supports IP. Functions specific for a
+    socket are available as methods of the socket object.
+    .
+
+Object-based Interface untuk low level socket (POSIX)
+
+Internet Socket
+---------------
+
+::
+
+    In [3]: socket.SOCK
+    socket.SOCK_DGRAM      socket.SOCK_RDM        socket.SOCK_STREAM
+    socket.SOCK_RAW        socket.SOCK_SEQPACKET  
+
+SOCK_DGRAM
+``````````
+Datagram socket, connectionless socket.
+
+SOCK_STREAM
+```````````
+Stream socket, reliable tow-way connected communicatino stream.
+
+
+Quiz
+====
+
+Kegunaan TCP vs. UDP?
+
+
+socket API
+----------
+
+.. function:: socket.socket([family[, type[, proto]]])
+
+    Membuat object socket berdasarkan address family (default: AF_INET),
+    tipe stream (SOCK_DGRAM atau default: SOCK_STREAM) dan protocol (0).
+
+
+Socket Object
+-------------
+
+.. function:: accept()
+    
+    Menerima koneksi, mengembalikan socket yang dibuat dan alamat client
+
+.. function:: bind(addr)
+    
+    bind socket ke alamat local
+
+.. function:: close()
+    
+    menutup socket
+
+.. function:: connect(addr)
+
+    membuat koneksi dengan alamat remote
+
+.. function:: getpeername()
+
+    mengembalikan alamat remote
+
+.. function:: getsockname()
+
+    mengembalikan alamat local
+
+
+Socket Object (cont)
+--------------------
+
+.. function:: listen(n)
+ 
+    memulai *listening* koneksi yang masuk
+
+
+.. function:: recv(buflen[, flags])
+    
+    menerima data
+
+.. function:: recvfrom(buflen[, flags])
+
+    menerima data dan alamat pengirim
+
+.. function:: sendall(data[, flags])
+
+    mengirim semua data
+
+.. function:: send(data[, flags])
+
+    mengirim data, mungkin tidak semuanya
+
+.. function:: shutdown(how)
+    
+    shut down traffic, satu arah maupun dua arah
+
+Client & Server
+===============
+
+.. figure:: /_static/bg.png
+  :class: fill
+
+
+Echo Server
+-----------
+
+Client mengirim pesan ``msg``, server membalas dengan pesan 
+``msg`` yang sama.
+
+Echo Server UDP
+---------------
+
+.. code-block:: python
+   :linenos:
+
+    import socket
+    
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.bind(('127.0.0.1', 5555))
+
+    while True:
+        msg, address = s.recvfrom(65535) # bytes
+        print('client %s mengirim %s' % (address, msg))
+        s.sendto(msg, address)
+        print('balasan dikirim')
+
+Echo Client UDP
+---------------
+
+.. code-block:: python
+   :linenos:
+    
+    import socket
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.sendto('Isi pesan', ('127.0.0.1', 5555))
+
+    # menerima pesan
+    msg, address = s.recvfrom(65535) # bukan hanya dari server
+    print('server %s membalas: %s' % (address, msg))
+
+Echo Client UDP 2
+-----------------
+
+.. code-block:: python
+   :linenos:
+    
+    import socket
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('127.0.0.1', 5555))
+    s.send('Isi pesan')
+
+    # menerima pesan
+    msg = s.recv(65535)
+    print('server membalas: %s' % msg)
+
+
+Mengirim & Menerima data
+------------------------
+
+Mengapa ada ``send`` dan ``sendall``?
+
+Apa yang terjadi ketika method ``send`` dan ``recv`` dipanggil?
+
+Kemungkinan mengirim
+--------------------
+
+- Data diterima langsung oleh operating sistem (Network OK, buffer OK).
+  Non-block, mengembalikan panjang data yang dikirim.
+- Network Not OK, buffer full. Block.
+- Buffer hampir penuh. Non-block, mengembalikan panjang data yang berhasil
+  diproses.
+
+.. code-block:: python
+
+    bytes_sent = 0
+    while bytes_sent < len(msg):
+        msg_remaining = message[bytes_sent:]
+        bytes_sent += s.send(msg_remaining)
+
+Kemungkinan menerima
+--------------------
+
+- Data belum tersedia. ``recv()`` Block.
+- Data tersedia, ``recv()`` menerima data sesuai jumlah ``buflen``.
+- Data sebagian tersedia, ``recv()`` mengembalikan data yang ada pada
+  buffer.
+
+.. code-block:: python
+
+    def recv_all(sock, length):
+        temp = ''
+        while len(data) < length:
+            more = sock.recv(length - len(temp))
+            if not more:
+                raise EOFError('panjang tidak sesuai')
+            temp += more
+        return temp
+
+recv_until
+----------
+
+.. code-block:: python
+
+    # utils.py
+    def recv_until(sock, eof_char='.'):
+        temp = ''
+        char = ''
+        
+        while char != eof_char:
+            char = sock.recv(1)
+            if char:
+                temp += char
+            else:
+                break
+
+        return temp
+
+
+Echo Server TCP
+---------------
+
+.. code-block:: python
+   :linenos:
+   :emphasize-lines: 5,12
+
+    import socket
+    from utils import recv_until
+
+    # passive socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    s.bind(('127.0.0.1', 5555))
+    s.listen(1)
+
+    while True:
+        # mengembalikan active/connected socket
+        sc, sockname = s.accept() 
+        print('koneksi dari %s' % repr(sockname))
+        msg = recv_until(sc)
+        sc.sendall(msg)
+        sc.close()
+        print('balasan dikirim')
+
+
+
+Echo Client TCP
+---------------
+
+.. code-block:: python
+   :linenos:
+
+    import socket
+    from utils import recv_until
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(('127.0.0.1', 5555))
+    print('socket local %s' % repr(s.getsockname()))
+    s.sendall('Isi pesan.')
+    msg = recv_until(s)
+    print('balasan server: %s' % msg)
+    s.close()
+
+
+Caesar cipher
+-------------
+
+.. figure:: /_static/caesar_cipher.png
+
+Format pesan
+
+::
+
+    (d/e)(shift)(message).
+
+    d: Decrypt (geser kiri) ?
+    e: Encrypt (geser kanan) ?
+    shift: jumlah pergeseran (2 digit)
+    message: plaintext / ciphertext (lowercase)
+
+
+
+Caesar cipher module
+--------------------
+
+.. code-block:: python
+   :linenos:
+
+    # caesar.py
+    from string import maketrans
+    from string import ascii_lowercase as al
+
+    def cipher(msg, shift=3):
+        shifted = al[shift:] + al[:shift]
+        trans_table  = maketrans(al, shifted)
+        return msg.translate(trans_table)
+
+
+Caesar cipher Server
+--------------------
+
+.. code-block:: python
+   :linenos:
+
+    import socket
+    from utils import recv_until
+    from caesar import cipher
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    s.bind(('127.0.0.1', 5555))
+    s.listen(1)
+    while True:
+        sc, sockname = s.accept()
+        print('koneksi dari %s' % repr(sockname))
+        msg = recv_until(sc)
+        try:
+            nshift = int(msg[1:3])
+        except ValueError:
+            nshift = 0
+        nshift = -nshift if msg[0] == 'd' else nshift
+        msg = cipher(msg[3:], nshift)
+        sc.sendall(msg)
+        sc.close()
+
+
+Caesar chiper Client
+--------------------
+
+.. code-block:: python
+   :linenos:
+
+    import socket
+    from utils import recv_until
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(('127.0.0.1', 5555))
+    s.sendall('e10isi pesan.')
+    msg = recv_until(s)
+    print('balasan server: %s' % msg)
+    s.close()
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(('127.0.0.1', 5555))
+    s.sendall('d10%s' % msg)
+    msg = recv_until(s)
+    print('balasan server: %s' % msg)
+    s.close()
+
+Simple Port Scanner
+-------------------
+
+.. code-block:: python
+   :linenos:
+
+    import socket
+
+    if __name__ == '__main__':
+        target = raw_input('target: ')
+
+        for port in range(20, 1025):
+            s = socket.socket()
+            s.settimeout(0.01)  # dalam detik
+
+            result = s.connect_ex((target, port))
+
+            if result == 0:
+                print('port %d: OPEN' % port)
+
+            s.close()
+
+End
+===
+
+.. figure:: /_static/bg.png
+  :class: fill
+
+Q & A
+
+
+.. _saktidwicahyono.name: http://saktidwicahyono.name
+.. _insan infonesia: http://www.insan.co.id
+.. _Beej Jorgensen: http://www.beej.us/guide/bgnet/output/html/singlepage/bgnet.html
+.. _3 Februari 2011: http://en.wikipedia.org/wiki/IPv4_address_exhaustion

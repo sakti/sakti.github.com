@@ -1,0 +1,72 @@
+.slides > article.level-1 {
+    padding-right: 0px;
+}
+
+.slides > article.level-1 > h1 {
+    color: #222;
+    font-size: 2em;
+    margin-top: 35%;
+    background: rgba(255, 255, 255, 0.65);
+    line-height: 1.5em;
+    padding-left: 30px;
+}
+
+.slides > article.level-1 > p {
+    color: #333;
+    font-size: 1em;
+    line-height: 1em;;
+    background: rgba(255, 255, 255, 0.65);
+    text-align: right;
+    margin-top: 0px;
+    padding-right: 20px;
+    padding-left: 60px;
+    padding-bottom: 0.5em;
+}
+
+.slides > article.level-1 .caption {
+    color: black;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 0 5px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+q::before {
+    font-size:1.2em;
+}
+
+q::after{
+    font-size:1.2em;
+}
+
+.right{
+    float:right;
+}
+article img, article img.centered{
+    margin-top:10px;
+}
+article img.fill{
+    margin-top:0px;
+}
+
+table.highlighttable td{
+    border:none;
+}
+
+table.highlighttable td.linenos{
+    width:3%;
+    background:transparent;
+}
+
+table.highlighttable td.linenos .linenodiv pre{
+    box-shadow:none;
+    color:#333;
+}
+dl.function {
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+    font-size: 20px;
+}
+
+table{
+    margin-top:5px !important;
+}

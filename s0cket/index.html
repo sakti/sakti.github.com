@@ -1,0 +1,759 @@
+
+<!DOCTYPE html>
+
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python Network Programming, socket module &mdash; Python Network Programming, socket module 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/slides.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/common.js"></script>
+    <script type="text/javascript" src="_static/slides.js"></script>
+    <script type="text/javascript" src="_static/sync.js"></script>
+    <script type="text/javascript" src="_static/controller.js"></script>
+    <script type="text/javascript" src="_static/init.js"></script>
+    <link rel="top" title="Python Network Programming, socket module 1.0 documentation" href="#" /> 
+  </head>
+  <body>
+
+<section
+   id="slide_container"
+   class='slides layout-regular'>
+
+
+  <article class="slide level-1" id="python-network-programming-socket-module">
+<h1>Python Network Programming, socket module</h1>
+<div class="figure">
+<img alt="_images/google_server.jpg" class="fill" src="_images/google_server.jpg" />
+<p class="caption">CC BY <a class="reference external" href="http://www.flickr.com/photos/epitti/2370848133/">http://www.flickr.com/photos/epitti/2370848133/</a></p>
+</div>
+<p>ID Python Meetup, 23 Februari 2013</p>
+
+</article>
+<article class="slide level-2" id="me">
+<h2>Me</h2>
+<div class="figure">
+<img alt="_images/bg.png" class="fill" src="_images/bg.png" />
+</div>
+<p>Sakti Dwi Cahyono</p>
+<p>webdev &#64; <a class="reference external" href="http://www.insan.co.id">insan infonesia</a></p>
+<p><a class="reference external" href="http://saktidwicahyono.name">saktidwicahyono.name</a></p>
+<p>github.com/sakti</p>
+<p>&#64;saktidc</p>
+
+</article>
+<article class="slide level-2" id="agenda">
+<h2>Agenda</h2>
+<div class="figure">
+<img alt="_images/bg.png" class="fill" src="_images/bg.png" />
+</div>
+<ul class="simple">
+<li>Intro TCP/IP</li>
+<li>Socket</li>
+<li>Client &amp; Server Program</li>
+</ul>
+
+</article>
+<article class="slide level-2" id="intro-tcp-ip">
+<h2>Intro TCP/IP</h2>
+<div class="figure">
+<img alt="_images/bg.png" class="fill" src="_images/bg.png" />
+</div>
+
+</article>
+<article class="slide level-3" id="internet">
+<h3>Internet</h3>
+<div class="figure">
+<img alt="_images/Internet_map_1024.jpg" class="fill" src="_images/Internet_map_1024.jpg" />
+<p class="caption">source: wikipedia</p>
+</div>
+<p class="white">Internet = Internetwork, interconnecting computer networks</p>
+
+</article>
+<article class="slide level-3" id="apa-itu-tcp-ip">
+<h3>Apa itu TCP/IP</h3>
+<p>Kumpulan <em>protocol</em> kumunikasi yang digunakan pada Internet atau network
+sejenis.</p>
+<p><em>Protocol stack</em> paling popular untuk <em>wide area network</em>.</p>
+<p>Transmission Control Protocol (675, 793, 1122, 2581),
+Internet Protocol (ipv4: 791).</p>
+
+</article>
+<article class="slide level-3" id="seberapa-besar">
+<h3>Seberapa besar?</h3>
+<p>IPv4 menggunakan 32-bit untuk alamat IP.</p>
+<div class="highlight-python"><pre>$python -c "'{0:,}'.format(2 ** 32)"
+
+4,294,967,296</pre>
+</div>
+<p>Sudah habis pada tanggal <a class="reference external" href="http://en.wikipedia.org/wiki/IPv4_address_exhaustion">3 Februari 2011</a>.</p>
+
+</article>
+<article class="slide level-3" id="layered-model">
+<h3>Layered Model</h3>
+<ul class="simple">
+<li>Application Layer (http, ssh, ftp, xmpp, dns)</li>
+<li>Transport Layer (TCP, UDP)</li>
+<li>Internet Layer (IP &amp; routing)</li>
+<li>Network Access / Link Layer (Ethernet, wi-fi, ...)</li>
+</ul>
+
+</article>
+<article class="slide level-3" id="cara-kerja">
+<h3>Cara Kerja</h3>
+<div class="figure">
+<img alt="_images/ip_stack_connections.png" class="centered" src="_images/ip_stack_connections.png" style="width: 500px;" />
+<p class="caption">source: wikipedia</p>
+</div>
+
+</article>
+<article class="slide level-3" id="enkapsulasi-data">
+<h3>Enkapsulasi Data</h3>
+<div class="figure">
+<img alt="_images/udp_encapsulation.png" class="centered" src="_images/udp_encapsulation.png" style="width: 700px;" />
+<p class="caption">source: wikipedia</p>
+</div>
+
+</article>
+<article class="slide level-3" id="alamat-ip-internet-layer">
+<h3>Alamat IP (Internet Layer)</h3>
+<div class="section level-4" id="ipv4">
+<h4>IPv4</h4>
+<p>32 bit</p>
+<div class="highlight-python"><pre>74.125.135.113</pre>
+</div>
+</div><div class="section level-4" id="ipv6">
+<h4>IPv6</h4>
+<p>128 bit</p>
+<div class="highlight-python"><pre>2404:6800:4003:802::1007</pre>
+</div>
+</div>
+</article>
+<article class="slide level-3" id="nomor-port-transport-layer">
+<h3>Nomor Port (Transport Layer)</h3>
+<p>16 bit unsigned integer (1 - 65535).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Well-known</td>
+<td>1 - 1023</td>
+</tr>
+<tr class="row-even"><td>Registered</td>
+<td>1024 - 49151</td>
+</tr>
+<tr class="row-odd"><td>Dynamic</td>
+<td>49152 - 65535</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><pre>$cat /etc/services
+.
+.
+ftp-data    20/tcp
+ftp         21/tcp
+fsp         21/udp      fspd
+ssh         22/tcp              # SSH Remote Login Protocol
+ssh         22/udp
+telnet      23/tcp
+smtp        25/tcp      mail
+.</pre>
+</div>
+
+</article>
+<article class="slide level-3" id="byte-order">
+<h3>Byte-Order</h3>
+<p>Jika data lebih panjang dari 1 byte. Bagaimana cara menyusunnya?</p>
+<div class="highlight-python"><pre>int         2 bytes
+long        4 bytes
+long long   8 bytes
+
+Decimal 11111 = 0x2b67</pre>
+</div>
+<p>Big-endian</p>
+<div class="highlight-python"><pre>0x2b 0x67</pre>
+</div>
+<p>Little-endian</p>
+<div class="highlight-python"><pre>0x67 0x2b</pre>
+</div>
+
+</article>
+<article class="slide level-2" id="socket">
+<h2>Socket</h2>
+<div class="figure">
+<img alt="_images/bg.png" class="fill" src="_images/bg.png" />
+</div>
+
+</article>
+<article class="slide level-3" id="apa-itu-socket">
+<h3>Apa itu socket?</h3>
+<p>Everything in Unix is a file.</p>
+<blockquote>
+<div><p>&quot;a way to speak to other programs using standard Unix file
+descriptors.&quot;</p>
+<p class="attribution">&mdash;<a class="reference external" href="http://www.beej.us/guide/bgnet/output/html/singlepage/bgnet.html">Beej Jorgensen</a></p>
+</div></blockquote>
+
+</article>
+<article class="slide level-3" id="file-descriptor">
+<h3>File descriptor</h3>
+<div class="highlight-c"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="s">&quot;write to stdout</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="s">&quot;write to stderr</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fileno</span><span class="p">(</span><span class="n">stdin</span><span class="p">),</span> <span class="n">fileno</span><span class="p">(</span><span class="n">stdout</span><span class="p">),</span>
+        <span class="n">fileno</span><span class="p">(</span><span class="n">stderr</span><span class="p">));</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>output:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">write</span> <span class="n">to</span> <span class="n">stdout</span>
+<span class="n">write</span> <span class="n">to</span> <span class="n">sterr</span>
+<span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-3" id="file-descriptor-python-version">
+<h3>File descriptor, python version</h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;write to stdout</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;write to stderr</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%d</span><span class="s"> </span><span class="si">%d</span><span class="s"> </span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">fileno</span><span class="p">()))</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-3" id="python-socket-module">
+<h3>Python socket module</h3>
+<div class="highlight-c"><pre>$ipython
+In [1]: import socket
+In [2]: socket?
+..
+Docstring:
+This module provides socket operations and some related functions.
+On Unix, it supports IP (Internet Protocol) and Unix domain sockets.
+On other systems, it only supports IP. Functions specific for a
+socket are available as methods of the socket object.
+.</pre>
+</div>
+<p>Object-based Interface untuk low level socket (POSIX)</p>
+
+</article>
+<article class="slide level-3" id="internet-socket">
+<h3>Internet Socket</h3>
+<div class="highlight-c"><div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">:</span> <span class="n">socket</span><span class="p">.</span><span class="n">SOCK</span>
+<span class="n">socket</span><span class="p">.</span><span class="n">SOCK_DGRAM</span>      <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_RDM</span>        <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span>
+<span class="n">socket</span><span class="p">.</span><span class="n">SOCK_RAW</span>        <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_SEQPACKET</span>
+</pre></div>
+</div>
+<div class="section level-4" id="sock-dgram">
+<h4>SOCK_DGRAM</h4>
+<p>Datagram socket, connectionless socket.</p>
+</div><div class="section level-4" id="sock-stream">
+<h4>SOCK_STREAM</h4>
+<p>Stream socket, reliable tow-way connected communicatino stream.</p>
+</div>
+</article>
+<article class="slide level-2" id="quiz">
+<h2>Quiz</h2>
+<p>Kegunaan TCP vs. UDP?</p>
+
+</article>
+<article class="slide level-3" id="socket-api">
+<h3>socket API</h3>
+<dl class="function">
+<dt id="socket.socket">
+<tt class="descclassname">socket.</tt><tt class="descname">socket</tt><big>(</big><span class="optional">[</span><em>family</em><span class="optional">[</span>, <em>type</em><span class="optional">[</span>, <em>proto</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><big>)</big></dt>
+<dd><p>Membuat object socket berdasarkan address family (default: AF_INET),
+tipe stream (SOCK_DGRAM atau default: SOCK_STREAM) dan protocol (0).</p>
+</dd></dl>
+
+
+</article>
+<article class="slide level-3" id="socket-object">
+<h3>Socket Object</h3>
+<dl class="function">
+<dt id="accept">
+<tt class="descname">accept</tt><big>(</big><big>)</big></dt>
+<dd><p>Menerima koneksi, mengembalikan socket yang dibuat dan alamat client</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bind">
+<tt class="descname">bind</tt><big>(</big><em>addr</em><big>)</big></dt>
+<dd><p>bind socket ke alamat local</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="close">
+<tt class="descname">close</tt><big>(</big><big>)</big></dt>
+<dd><p>menutup socket</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="connect">
+<tt class="descname">connect</tt><big>(</big><em>addr</em><big>)</big></dt>
+<dd><p>membuat koneksi dengan alamat remote</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="getpeername">
+<tt class="descname">getpeername</tt><big>(</big><big>)</big></dt>
+<dd><p>mengembalikan alamat remote</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="getsockname">
+<tt class="descname">getsockname</tt><big>(</big><big>)</big></dt>
+<dd><p>mengembalikan alamat local</p>
+</dd></dl>
+
+
+</article>
+<article class="slide level-3" id="socket-object-cont">
+<h3>Socket Object (cont)</h3>
+<dl class="function">
+<dt id="listen">
+<tt class="descname">listen</tt><big>(</big><em>n</em><big>)</big></dt>
+<dd><p>memulai <em>listening</em> koneksi yang masuk</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="recv">
+<tt class="descname">recv</tt><big>(</big><em>buflen</em><span class="optional">[</span>, <em>flags</em><span class="optional">]</span><big>)</big></dt>
+<dd><p>menerima data</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="recvfrom">
+<tt class="descname">recvfrom</tt><big>(</big><em>buflen</em><span class="optional">[</span>, <em>flags</em><span class="optional">]</span><big>)</big></dt>
+<dd><p>menerima data dan alamat pengirim</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="sendall">
+<tt class="descname">sendall</tt><big>(</big><em>data</em><span class="optional">[</span>, <em>flags</em><span class="optional">]</span><big>)</big></dt>
+<dd><p>mengirim semua data</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="send">
+<tt class="descname">send</tt><big>(</big><em>data</em><span class="optional">[</span>, <em>flags</em><span class="optional">]</span><big>)</big></dt>
+<dd><p>mengirim data, mungkin tidak semuanya</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="shutdown">
+<tt class="descname">shutdown</tt><big>(</big><em>how</em><big>)</big></dt>
+<dd><p>shut down traffic, satu arah maupun dua arah</p>
+</dd></dl>
+
+
+</article>
+<article class="slide level-2" id="client-server">
+<h2>Client &amp; Server</h2>
+<div class="figure">
+<img alt="_images/bg.png" class="fill" src="_images/bg.png" />
+</div>
+
+</article>
+<article class="slide level-3" id="echo-server">
+<h3>Echo Server</h3>
+<p>Client mengirim pesan <tt class="docutils literal"><span class="pre">msg</span></tt>, server membalas dengan pesan
+<tt class="docutils literal"><span class="pre">msg</span></tt> yang sama.</p>
+
+</article>
+<article class="slide level-3" id="echo-server-udp">
+<h3>Echo Server UDP</h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">socket</span>
+
+ <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">))</span>
+
+ <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+     <span class="n">msg</span><span class="p">,</span> <span class="n">address</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="mi">65535</span><span class="p">)</span> <span class="c"># bytes</span>
+     <span class="k">print</span><span class="p">(</span><span class="s">&#39;client </span><span class="si">%s</span><span class="s"> mengirim </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
+     <span class="n">s</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span>
+     <span class="k">print</span><span class="p">(</span><span class="s">&#39;balasan dikirim&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+
+</article>
+<article class="slide level-3" id="echo-client-udp">
+<h3>Echo Client UDP</h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">socket</span>
+
+ <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">sendto</span><span class="p">(</span><span class="s">&#39;Isi pesan&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">))</span>
+
+ <span class="c"># menerima pesan</span>
+ <span class="n">msg</span><span class="p">,</span> <span class="n">address</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recvfrom</span><span class="p">(</span><span class="mi">65535</span><span class="p">)</span> <span class="c"># bukan hanya dari server</span>
+ <span class="k">print</span><span class="p">(</span><span class="s">&#39;server </span><span class="si">%s</span><span class="s"> membalas: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+
+</article>
+<article class="slide level-3" id="echo-client-udp-2">
+<h3>Echo Client UDP 2</h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">socket</span>
+
+ <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">))</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&#39;Isi pesan&#39;</span><span class="p">)</span>
+
+ <span class="c"># menerima pesan</span>
+ <span class="n">msg</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">65535</span><span class="p">)</span>
+ <span class="k">print</span><span class="p">(</span><span class="s">&#39;server membalas: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">msg</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+
+</article>
+<article class="slide level-3" id="mengirim-menerima-data">
+<h3>Mengirim &amp; Menerima data</h3>
+<p>Mengapa ada <tt class="docutils literal"><span class="pre">send</span></tt> dan <tt class="docutils literal"><span class="pre">sendall</span></tt>?</p>
+<p>Apa yang terjadi ketika method <tt class="docutils literal"><span class="pre">send</span></tt> dan <tt class="docutils literal"><span class="pre">recv</span></tt> dipanggil?</p>
+
+</article>
+<article class="slide level-3" id="kemungkinan-mengirim">
+<h3>Kemungkinan mengirim</h3>
+<ul class="simple">
+<li>Data diterima langsung oleh operating sistem (Network OK, buffer OK).
+Non-block, mengembalikan panjang data yang dikirim.</li>
+<li>Network Not OK, buffer full. Block.</li>
+<li>Buffer hampir penuh. Non-block, mengembalikan panjang data yang berhasil
+diproses.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">bytes_sent</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">bytes_sent</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="n">msg_remaining</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="n">bytes_sent</span><span class="p">:]</span>
+    <span class="n">bytes_sent</span> <span class="o">+=</span> <span class="n">s</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg_remaining</span><span class="p">)</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-3" id="kemungkinan-menerima">
+<h3>Kemungkinan menerima</h3>
+<ul class="simple">
+<li>Data belum tersedia. <tt class="docutils literal"><span class="pre">recv()</span></tt> Block.</li>
+<li>Data tersedia, <tt class="docutils literal"><span class="pre">recv()</span></tt> menerima data sesuai jumlah <tt class="docutils literal"><span class="pre">buflen</span></tt>.</li>
+<li>Data sebagian tersedia, <tt class="docutils literal"><span class="pre">recv()</span></tt> mengembalikan data yang ada pada
+buffer.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">recv_all</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">:</span>
+        <span class="n">more</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">more</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">EOFError</span><span class="p">(</span><span class="s">&#39;panjang tidak sesuai&#39;</span><span class="p">)</span>
+        <span class="n">temp</span> <span class="o">+=</span> <span class="n">more</span>
+    <span class="k">return</span> <span class="n">temp</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-3" id="recv-until">
+<h3>recv_until</h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># utils.py</span>
+<span class="k">def</span> <span class="nf">recv_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">eof_char</span><span class="o">=</span><span class="s">&#39;.&#39;</span><span class="p">):</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+    <span class="k">while</span> <span class="n">char</span> <span class="o">!=</span> <span class="n">eof_char</span><span class="p">:</span>
+        <span class="n">char</span> <span class="o">=</span> <span class="n">sock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">char</span><span class="p">:</span>
+            <span class="n">temp</span> <span class="o">+=</span> <span class="n">char</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">temp</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-3" id="echo-server-tcp">
+<h3>Echo Server TCP</h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">socket</span>
+ <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">recv_until</span>
+
+ <span class="c"># passive socket</span>
+<span class="hll"> <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+</span> <span class="n">s</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">))</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+ <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+     <span class="c"># mengembalikan active/connected socket</span>
+<span class="hll">     <span class="n">sc</span><span class="p">,</span> <span class="n">sockname</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+</span>     <span class="k">print</span><span class="p">(</span><span class="s">&#39;koneksi dari </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">repr</span><span class="p">(</span><span class="n">sockname</span><span class="p">))</span>
+     <span class="n">msg</span> <span class="o">=</span> <span class="n">recv_until</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+     <span class="n">sc</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+     <span class="n">sc</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="k">print</span><span class="p">(</span><span class="s">&#39;balasan dikirim&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+
+</article>
+<article class="slide level-3" id="echo-client-tcp">
+<h3>Echo Client TCP</h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">socket</span>
+ <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">recv_until</span>
+
+ <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">))</span>
+ <span class="k">print</span><span class="p">(</span><span class="s">&#39;socket local </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()))</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s">&#39;Isi pesan.&#39;</span><span class="p">)</span>
+ <span class="n">msg</span> <span class="o">=</span> <span class="n">recv_until</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+ <span class="k">print</span><span class="p">(</span><span class="s">&#39;balasan server: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">msg</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+
+</article>
+<article class="slide level-3" id="caesar-cipher">
+<h3>Caesar cipher</h3>
+<div class="figure">
+<img alt="_images/caesar_cipher.png" src="_images/caesar_cipher.png" />
+</div>
+<p>Format pesan</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="p">(</span><span class="n">d</span><span class="o">/</span><span class="n">e</span><span class="p">)(</span><span class="n">shift</span><span class="p">)(</span><span class="n">message</span><span class="p">).</span>
+
+<span class="nl">d:</span> <span class="n">Decrypt</span> <span class="p">(</span><span class="n">geser</span> <span class="n">kiri</span><span class="p">)</span> <span class="o">?</span>
+<span class="nl">e:</span> <span class="n">Encrypt</span> <span class="p">(</span><span class="n">geser</span> <span class="n">kanan</span><span class="p">)</span> <span class="o">?</span>
+<span class="nl">shift:</span> <span class="n">jumlah</span> <span class="n">pergeseran</span> <span class="p">(</span><span class="mi">2</span> <span class="n">digit</span><span class="p">)</span>
+<span class="nl">message:</span> <span class="n">plaintext</span> <span class="o">/</span> <span class="n">ciphertext</span> <span class="p">(</span><span class="n">lowercase</span><span class="p">)</span>
+</pre></div>
+</div>
+
+</article>
+<article class="slide level-3" id="caesar-cipher-module">
+<h3>Caesar cipher module</h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre> <span class="c"># caesar.py</span>
+ <span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">maketrans</span>
+ <span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_lowercase</span> <span class="k">as</span> <span class="n">al</span>
+
+ <span class="k">def</span> <span class="nf">cipher</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+     <span class="n">shifted</span> <span class="o">=</span> <span class="n">al</span><span class="p">[</span><span class="n">shift</span><span class="p">:]</span> <span class="o">+</span> <span class="n">al</span><span class="p">[:</span><span class="n">shift</span><span class="p">]</span>
+     <span class="n">trans_table</span>  <span class="o">=</span> <span class="n">maketrans</span><span class="p">(</span><span class="n">al</span><span class="p">,</span> <span class="n">shifted</span><span class="p">)</span>
+     <span class="k">return</span> <span class="n">msg</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">trans_table</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+
+</article>
+<article class="slide level-3" id="caesar-cipher-server">
+<h3>Caesar cipher Server</h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">socket</span>
+ <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">recv_until</span>
+ <span class="kn">from</span> <span class="nn">caesar</span> <span class="kn">import</span> <span class="n">cipher</span>
+
+ <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">))</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+ <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+     <span class="n">sc</span><span class="p">,</span> <span class="n">sockname</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+     <span class="k">print</span><span class="p">(</span><span class="s">&#39;koneksi dari </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">repr</span><span class="p">(</span><span class="n">sockname</span><span class="p">))</span>
+     <span class="n">msg</span> <span class="o">=</span> <span class="n">recv_until</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+     <span class="k">try</span><span class="p">:</span>
+         <span class="n">nshift</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+         <span class="n">nshift</span> <span class="o">=</span> <span class="mi">0</span>
+     <span class="n">nshift</span> <span class="o">=</span> <span class="o">-</span><span class="n">nshift</span> <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;d&#39;</span> <span class="k">else</span> <span class="n">nshift</span>
+     <span class="n">msg</span> <span class="o">=</span> <span class="n">cipher</span><span class="p">(</span><span class="n">msg</span><span class="p">[</span><span class="mi">3</span><span class="p">:],</span> <span class="n">nshift</span><span class="p">)</span>
+     <span class="n">sc</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+     <span class="n">sc</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+
+</article>
+<article class="slide level-3" id="caesar-chiper-client">
+<h3>Caesar chiper Client</h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">socket</span>
+ <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">recv_until</span>
+
+ <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">))</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s">&#39;e10isi pesan.&#39;</span><span class="p">)</span>
+ <span class="n">msg</span> <span class="o">=</span> <span class="n">recv_until</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+ <span class="k">print</span><span class="p">(</span><span class="s">&#39;balasan server: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">msg</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+ <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">5555</span><span class="p">))</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">sendall</span><span class="p">(</span><span class="s">&#39;d10</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">msg</span><span class="p">)</span>
+ <span class="n">msg</span> <span class="o">=</span> <span class="n">recv_until</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+ <span class="k">print</span><span class="p">(</span><span class="s">&#39;balasan server: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">msg</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+
+</article>
+<article class="slide level-3" id="simple-port-scanner">
+<h3>Simple Port Scanner</h3>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre> <span class="kn">import</span> <span class="nn">socket</span>
+
+ <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+     <span class="n">target</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&#39;target: &#39;</span><span class="p">)</span>
+
+     <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">1025</span><span class="p">):</span>
+         <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span>
+         <span class="n">s</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c"># dalam detik</span>
+
+         <span class="n">result</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">connect_ex</span><span class="p">((</span><span class="n">target</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span>
+
+         <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+             <span class="k">print</span><span class="p">(</span><span class="s">&#39;port </span><span class="si">%d</span><span class="s">: OPEN&#39;</span> <span class="o">%</span> <span class="n">port</span><span class="p">)</span>
+
+         <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+
+</article>
+<article class="slide level-2" id="end">
+<h2>End</h2>
+<div class="figure">
+<img alt="_images/bg.png" class="fill" src="_images/bg.png" />
+</div>
+<p>Q &amp; A</p>
+
+</article>
+
+
+</section>
+  </body>
+</html>
